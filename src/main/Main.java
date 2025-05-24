@@ -5,8 +5,14 @@ import processing.core.PApplet;
 public class Main extends PApplet {
     public static Main app;
 
+    public Point p = new Point(250,250,1);
+
+    public float dt,lastTime;
+
+    public final int screenW = 500, screenH = 500;
+
     public void settings() {
-        size(500, 500);
+        size(screenW, screenH);
     }
 
     public void setup(){
@@ -14,7 +20,14 @@ public class Main extends PApplet {
     }
 
     public void draw(){
+        frameRate(60);
+        int now = millis();
+        dt = (float) ((now - lastTime) / 1000.0);  // In seconds
+        lastTime = now;
         background(0);
+        p.update(dt);
+//        stroke(255);
+//        line(0,250,500,250);
 
     }
 
