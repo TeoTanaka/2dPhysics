@@ -22,7 +22,8 @@ public class Point {
         render();
     }
     public void render(){
-        Main.app.fill(255);
+        Main.app.noStroke();
+        Main.app.fill(255,0,0);
         Main.app.ellipse(x,y,5,5);
     }
     public void updatePos(float dt){
@@ -56,6 +57,13 @@ public class Point {
             velocityX *=-1;
         }
 
+    }
+
+    public float getX(){
+        return x;
+    }
+    public float getY(){
+        return y;
     }
 
 }

@@ -5,7 +5,9 @@ import processing.core.PApplet;
 public class Main extends PApplet {
     public static Main app;
 
-    public Point p = new Point(250,250,1);
+    public VerletPoint p = new VerletPoint(125,250,1);
+
+    public Point point = new Point(375,250,1);
 
     public float dt,lastTime;
 
@@ -26,8 +28,9 @@ public class Main extends PApplet {
         lastTime = now;
         background(0);
         p.update(dt);
-//        stroke(255);
-//        line(0,250,500,250);
+        point.update(dt);
+        stroke(255);
+        line(0,250,500,250);
 
     }
 
