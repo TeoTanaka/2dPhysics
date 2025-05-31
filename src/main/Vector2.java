@@ -2,8 +2,8 @@ package main;
 
 public class Vector2 {
 
-    private float x;
-    private float y;
+    public float x;
+    public float y;
 
     public Vector2(float x, float y){
         this.x = x;
@@ -13,6 +13,10 @@ public class Vector2 {
     public Vector2(Vector2 copy){
         this.x = copy.x;
         this.y = copy.y;
+    }
+    public Vector2(){
+        this.x = 0;
+        this.y = 0;
     }
 
     public Vector2 copy(){
@@ -40,6 +44,7 @@ public class Vector2 {
     public Vector2 add(Vector2 other){
         return new Vector2(this.x + other.x, this.y + other.y);
     }
+
 
 
 }

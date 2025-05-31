@@ -11,15 +11,25 @@ public class Stick {
         this.resistance = resistance;
         this.dist = dist;
     }
+    public Stick(Point p1, Point p2, float resistance){
+        this.p1 = p1;
+        this.p2 = p2;
+        this.resistance = resistance;
+        this.dist = p1.getPos().distance(p2.getPos());
+    }
 
-    public void update(){
-
+    public void update(float dt){
+        p1.update(dt);
+        p2.update(dt);
         render();
     }
 
     public void render(){
         Main.app.stroke(255);
-        Main.app.line(p1.getX(),p1.getY(),p2.getX(),p2.getY());
+        Vector2 pos1 = p1.getPos();
+        Vector2 pos2 = p2.getPos();
+        Main.app.line(pos1.x,pos1.y,pos2.x,pos2.y);
+
     }
     public void connect(){
         

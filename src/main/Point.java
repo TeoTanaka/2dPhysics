@@ -1,69 +1,65 @@
 package main;
 
 public class Point {
-    private float x;
-    private float y;
+
+    private Vector2 pos = new Vector2();
     private final float mass;
-    private float velocityX = 0;
-    private float velocityY = 0;
+    private Vector2 vel = new Vector2();
 
     private int forceX, forceY = 60;
 
     public Point(int x, int y, int mass){
-        this.x = x;
-        this.y = y;
+        pos.x = x;
+        pos.y = y;
         this.mass = mass;
     }
 
     public void update(float dt){
         constrain();
         updatePos(dt);
-        System.out.println("velY:"+velocityY);
+        System.out.println("x:"+pos.x+"  y:"+pos.y);
         render();
     }
     public void render(){
         Main.app.noStroke();
-        Main.app.fill(255,0,0);
-        Main.app.ellipse(x,y,5,5);
+        Main.app.fill(255);
+        Main.app.ellipse(pos.x,pos.y,5,5);
     }
     public void updatePos(float dt){
         float accX = forceX / mass;
         float accY = forceY / mass;
 
-        velocityX += accX * dt;//velocity before updating position, semi- implicit euler
-        velocityY += accY * dt;
+        vel.x += accX * dt;//velocity before updating position, semi- implicit euler
+        vel.y += accY * dt;
 
 
-        x = x + velocityX * dt;
-        y = y + velocityY * dt;
+        pos.x  += vel.x * dt;
+        pos.y  += vel.y * dt;
     }
 
     public void constrain(){
-        if (y > Main.app.screenH){
+        if (pos.y > Main.app.screenH){
 
-            y = Main.app.screenH;
-            velocityY *=-1;
+            pos.y = Main.app.screenH;
+            vel.y *=-1;
 
-        }else if ( y < 5){
-            y = 0;
-            velocityY *=-1;
+        }else if ( pos.y < 5){
+            pos.y = 0;
+            vel.y *=-1;
         }
-        if (x > Main.app.screenW){
-            x = Main.app.screenW;
-            velocityX *=-1;
+        if (pos.x > Main.app.screenW){
+            pos.x = Main.app.screenW;
+            vel.x *=-1;
 
-        }else if (x < 0){
-            x = 0;
-            velocityX *=-1;
+        }else if (pos.x < 0){
+            pos.x = 0;
+            vel.x *=-1;
         }
 
     }
 
-    public float getX(){
-        return x;
-    }
-    public float getY(){
-        return y;
+    public Vector2 getPos(){
+        return pos;
     }
 
 }
