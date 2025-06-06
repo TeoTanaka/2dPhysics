@@ -44,6 +44,18 @@ public class Vector2 {
     public Vector2 add(Vector2 other){
         return new Vector2(this.x + other.x, this.y + other.y);
     }
+    public Vector2 sub(Vector2 other){
+        return new Vector2(this.x - other.x, this.y - other.y);
+    }
+
+    public Vector2 mult(float scalar){
+        return new Vector2(x*scalar, y*scalar);
+    }
+
+    public Vector2 normalize(){
+        float mag = magnitude();
+        return new Vector2(x/mag,y/mag);
+    }
 
 
 

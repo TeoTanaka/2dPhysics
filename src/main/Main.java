@@ -5,12 +5,11 @@ import processing.core.PApplet;
 public class Main extends PApplet {
     public static Main app;
 
+    public Box b = new Box(new Vector2(250,250),new Vector2(100,100),1f,1f,100f);
 
 
 
-    public Point point = new Point(375,250,1);
 
-    public Stick stick = new Stick(new Point(100,250,1), new Point(150,250,1),0);
 
     public float dt,lastTime;
 
@@ -30,8 +29,10 @@ public class Main extends PApplet {
         dt = (float) ((now - lastTime) / 1000.0);  // In seconds
         lastTime = now;
         background(0);
-        point.update(dt);
-        stick.update(dt);
+        //point.update(dt);
+        b.update(dt);
+
+
         stroke(255);
         line(0,250,500,250);
 
