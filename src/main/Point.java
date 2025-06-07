@@ -1,93 +1,81 @@
 package main;
 
 public class Point {
+    private Vector2 pos, oldPos;
+    private Vector2 force = new Vector2();
+    private float mass,elasticity;
 
-    private Vector2 pos = new Vector2();
-    private float mass;
-    private Vector2 vel = new Vector2();
-
-    private float forceX, forceY = 60, elasticity;
-
-    public Point(float x, float y, float mass, float elasticity){
-        pos.x = x;
-        pos.y = y;
+    public Point(Vector2 pos, Vector2 oldPos, float mass, float elasticity){
+        this.pos = pos;
+        this.oldPos = oldPos;
         this.mass = mass;
-        this.elasticity = elasticity;//needs to be 0 to 1
+        this.elasticity = elasticity;
     }
-    public Point(float x, float y, float mass){
-        pos.x = x;
-        pos.y = y;
-        this.mass = mass;
-        this.elasticity =1;// elasticity;//needs to be 0 to 1
+    public Point(Vector2 pos, Vector2 oldPos){
+        this.pos = pos;
+        this.oldPos = oldPos;
+        this.mass = 1;
+        this.elasticity = 1;
     }
 
     public void update(float dt){
         constrain();
         updatePos(dt);
-        System.out.println("force x:"+forceX+"  force y:"+forceY);
+
+        //System.out.println("x:"+ pos.x+" y:"+pos.y);
         render();
     }
     public void render(){
+        Main.app.fill(255,0,0);
         Main.app.noStroke();
-        Main.app.fill(255);
         Main.app.ellipse(pos.x,pos.y,5,5);
     }
+
     public void updatePos(float dt){
-        // Gravity
-        forceY += 10f;
+        Vector2 acc = new Vector2();
+        acc.x = force.x / mass * Main.app.AIR_RESIST;
+        acc.y = force.y / mass * Main.app.AIR_RESIST;
 
-        float accX = forceX / mass;
-        float accY = forceY / mass;
+        Vector2 vel = new Vector2();
+        vel.x = pos.x- oldPos.x ;
+        vel.y = pos.y- oldPos.y ;
 
-        vel.x += accX * dt;//velocity before updating position, semi- implicit euler
-        vel.y += accY * dt;
+        force.x = 0;
+        force.y = Main.app.GRAVITY;//apply forces
 
+        System.out.println("velocity x:"+vel.x+" velocity y:"+vel.y);
 
-        pos.x  += vel.x * dt;
-        pos.y  += vel.y * dt;
+        oldPos.x = pos.x;
+        oldPos.y = pos.y;
 
-        forceX = 0.0f;
-        forceY = 0.0f;
+        pos.x += vel.x + acc.x *dt*dt;
+        pos.y += vel.y + acc.y *dt*dt;
+        constrain();
     }
-
     public void constrain(){
+        Vector2 vel = new Vector2();
+        vel.x = pos.x- oldPos.x;
+        vel.y = pos.y- oldPos.y;
+
         if (pos.y > Main.app.screenH){
 
             pos.y = Main.app.screenH;
-            vel.y *=-elasticity;
+            oldPos.y = pos.y+vel.y*elasticity;
+            System.out.println(true);
 
         }else if ( pos.y < 0){
             pos.y = 0;
-            vel.y *=-elasticity;
+            oldPos.y = pos.y+vel.y*elasticity;
         }
         if (pos.x > Main.app.screenW){
             pos.x = Main.app.screenW;
-            vel.x *=-elasticity;
+            oldPos.x = pos.x+vel.x*elasticity;
 
         }else if (pos.x < 0){
             pos.x = 0;
-            vel.x *=-elasticity;
+            oldPos.x = pos.x+vel.x*elasticity;
         }
-
     }
-    public void addForce(Vector2 forces){
-        forceX += forces.x;
-        forceY += forces.y;
-
-    }
-
-    public Vector2 getPos(){
-        return pos;
-    }
-
-    public Vector2 getVel(){
-        return vel;
-    }
-
-    public float getMass() {return mass;}
-    public void setMass(float n) { mass = n;}
-
-    public void setElasticity(float n){elasticity = n;}
 
 
 }
