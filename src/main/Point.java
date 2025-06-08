@@ -43,7 +43,6 @@ public class Point {
         force.x = 0;
         force.y = Main.app.GRAVITY;//apply forces
 
-        System.out.println("velocity x:"+vel.x+" velocity y:"+vel.y);
 
         oldPos.x = pos.x;
         oldPos.y = pos.y;
@@ -61,7 +60,6 @@ public class Point {
 
             pos.y = Main.app.screenH;
             oldPos.y = pos.y+vel.y*elasticity;
-            System.out.println(true);
 
         }else if ( pos.y < 0){
             pos.y = 0;
@@ -75,6 +73,14 @@ public class Point {
             pos.x = 0;
             oldPos.x = pos.x+vel.x*elasticity;
         }
+    }
+
+    public Vector2 getPos(){
+        return pos;
+    }
+
+    public void setPos(Vector2 p){
+        pos = p;
     }
 
 

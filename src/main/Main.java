@@ -9,10 +9,15 @@ public class Main extends PApplet {
 
     //public EulerStick s = new EulerStick(new EulerPoint(100,100,1),new EulerPoint(200,200,1),100f,1f,1f);
 
-    public Point p = new Point(new Vector2(250,250), new Vector2(250,250));
+    public Point p1 = new Point(new Vector2(250,250), new Vector2(250,250));
+    public Point p2 = new Point(new Vector2(200,200), new Vector2(200,200));
+
+    public Stick s = new Stick(p1,p2);
 
     public final float GRAVITY = 20;
     public final float AIR_RESIST = 1f;
+
+
 
 
 
@@ -36,8 +41,8 @@ public class Main extends PApplet {
         dt = (float) ((now - lastTime) / 1000.0);  // In seconds
         lastTime = now;
         background(0);
-        //point.update(dt);
-        p.update(dt);
+        s.update(dt);
+
 
 
         stroke(255);
