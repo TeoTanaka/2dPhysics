@@ -1,49 +1,53 @@
 package main;
 
+import java.util.Arrays;
+
 public class Box {
+    private float width,height;
+    private Point[] points;
+    private Stick[] sticks;
 
-    private float mass,elasticity,resistance;
-    private EulerPoint[] points;
+    private Vector2 dim = new Vector2();
+    private Vector2 pos = new Vector2();
 
-    private EulerStick[] sticks;
+    private float mass, elasticity;
 
-    private Vector2 pos,dim;
-
-
-    public Box(Vector2 pos, Vector2 dim,float mass, float elasticity, float resistance){
-        this.dim = dim;
-        this.pos = pos;
-        this.mass = mass;
-        this.elasticity = elasticity;
-        this.resistance = resistance;
+    public Box(float x, float y, float dimX, float dimY){
+        this.pos.x = x;
+        this.pos.y = y;
+        this.dim.x = dimX;
+        this.dim.y = dimY;
         initSelf();
     }
+    public void update(){
 
-
-
-    public void update(float dt){
-        for (EulerStick s : sticks){
-            s.update(dt);
-        }
     }
+
+
     public void initSelf(){
-
-        points = new EulerPoint[]{
-                new EulerPoint(pos.x, pos.y, mass, elasticity),
-                new EulerPoint(pos.x + dim.x, pos.y, mass, elasticity),
-                new EulerPoint(pos.x + dim.x, pos.y + dim.y, mass, elasticity),
-                new EulerPoint(pos.x, pos.y + dim.y, mass, elasticity),
+        this.points = new Point[]{
+                new Point(pos),
+                new Point(pos.x + dim.x, pos.y),
+                new Point(pos.x, pos.y + dim.y),
+                new Point(pos.x + dim.x, pos.y + dim.y)
         };
-
-
-        sticks = new EulerStick[]{
-                new EulerStick(points[0], points[1], resistance, mass, elasticity),
-                new EulerStick(points[1], points[2], resistance, mass, elasticity),
-                new EulerStick(points[2], points[3], resistance, mass, elasticity),
-                new EulerStick(points[3], points[0], resistance, mass, elasticity),
-                new EulerStick(points[1], points[3], resistance, mass, elasticity),
-                new EulerStick(points[0], points[2], resistance, mass, elasticity),
+        this.sticks = new Stick[]{
+                new Stick(points[0],points[1]),
+                new Stick(points[2],points[3]),
+                new Stick(points[0],points[2]),
+                new Stick(points[1],points[3]),
+                new Stick(points[0],points[3]),
+                new Stick(points[1],points[2]),
         };
+        for (Point p : points){
+            p.addSelf();
+        }
+        for (Stick s: sticks){
+            s.addSelf();
+        }
+
     }
+
+
 
 }

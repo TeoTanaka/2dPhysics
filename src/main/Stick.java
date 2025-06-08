@@ -12,12 +12,11 @@ public class Stick {
         this.length = p1.getPos().distance(p2.getPos());
         this.elasticity = 1;
         this.mass = 1;
+
     }
 
-    public void update(float dt){
+    public void update(){
         render();
-        p1.update(dt);
-        p2.update(dt);
         restrainPoints();
     }
 
@@ -41,4 +40,9 @@ public class Stick {
 
 
     }
+
+    public void addSelf(){
+        Main.sticks.add(this);
+    }
+
 }

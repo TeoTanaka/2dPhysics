@@ -2,26 +2,22 @@ package main;
 
 import processing.core.PApplet;
 
+import java.util.ArrayList;
+
 public class Main extends PApplet {
     public static Main app;
 
-    //public Box b = new Box(new Vector2(250,250),new Vector2(100,100),1f,1f,100f);
+    public static ArrayList<Point> points  = new ArrayList<Point>();
+    public static ArrayList<Stick> sticks  = new ArrayList<Stick>();
+    public static ArrayList<Box> boxes  = new ArrayList<Box>();
 
-    //public EulerStick s = new EulerStick(new EulerPoint(100,100,1),new EulerPoint(200,200,1),100f,1f,1f);
-
-    public Point p1 = new Point(new Vector2(250,250), new Vector2(250,250));
-    public Point p2 = new Point(new Vector2(200,200), new Vector2(200,200));
-
-    public Stick s = new Stick(p1,p2);
 
     public final float GRAVITY = 20;
     public final float AIR_RESIST = 1f;
 
 
 
-
-
-
+    public Box b = new Box(250,250,100,100);
 
     public float dt,lastTime;
 
@@ -33,6 +29,9 @@ public class Main extends PApplet {
 
     public void setup(){
         app=this;
+        for (int i = 0; i < Math.random()*10; i++){
+            Box box = new Box((float) (Math.random()*400)+100,(float) (Math.random()*400)+100,(float) (Math.random()*100),100);
+        }
     }
 
     public void draw(){
@@ -41,7 +40,15 @@ public class Main extends PApplet {
         dt = (float) ((now - lastTime) / 1000.0);  // In seconds
         lastTime = now;
         background(0);
-        s.update(dt);
+       for (Point p : points){
+           p.update(dt);
+       }
+       for (Stick s : sticks){
+           s.update();
+       }
+        for (Box b : boxes){
+            b.update();
+        }
 
 
 

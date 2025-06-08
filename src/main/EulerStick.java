@@ -56,8 +56,8 @@ public class EulerStick {
             //System.out.println("forceX"+ dir1.x+"  forceY"+dir1.y);
             p1.addForce(dir1);
             p2.addForce(dir2);
-            float dampingCoefficient1 = 1f;// * 2f * (float)Math.sqrt(p1.getMass() * resistance);
-            float dampingCoefficient2 = 1f;// * 2f * (float)Math.sqrt(p2.getMass() * resistance);
+            float dampingCoefficient1 = .8f;// * 2f * (float)Math.sqrt(p1.getMass() * resistance);
+            float dampingCoefficient2 = .8f;// * 2f * (float)Math.sqrt(p2.getMass() * resistance);
             p1.addForce(p1.getVel().mult(-1f).mult(dampingCoefficient1));
             p2.addForce(p2.getVel().mult(-1f).mult(dampingCoefficient2));
 

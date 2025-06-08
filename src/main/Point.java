@@ -1,7 +1,7 @@
 package main;
 
 public class Point {
-    private Vector2 pos, oldPos;
+    private Vector2 pos = new Vector2(), oldPos = new Vector2();
     private Vector2 force = new Vector2();
     private float mass,elasticity;
 
@@ -10,12 +10,29 @@ public class Point {
         this.oldPos = oldPos;
         this.mass = mass;
         this.elasticity = elasticity;
+        Main.points.add(this);
     }
     public Point(Vector2 pos, Vector2 oldPos){
         this.pos = pos;
         this.oldPos = oldPos;
         this.mass = 1;
         this.elasticity = 1;
+
+    }
+    public Point(Vector2 pos){
+        this.pos = pos;
+        this.oldPos = pos.copy();
+        this.mass = 1;
+        this.elasticity = 1;
+
+    }
+    public Point(float x, float y){
+        this.pos.x = x;
+        this.pos.y = y;
+        this.oldPos = pos.copy();
+        this.mass = 1;
+        this.elasticity = 1;
+
     }
 
     public void update(float dt){
@@ -37,7 +54,7 @@ public class Point {
         acc.y = force.y / mass * Main.app.AIR_RESIST;
 
         Vector2 vel = new Vector2();
-        vel.x = pos.x- oldPos.x ;
+        vel.x = pos.x- oldPos.x;
         vel.y = pos.y- oldPos.y ;
 
         force.x = 0;
@@ -81,6 +98,10 @@ public class Point {
 
     public void setPos(Vector2 p){
         pos = p;
+    }
+
+    public void addSelf(){
+        Main.points.add(this);
     }
 
 
