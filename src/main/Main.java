@@ -18,6 +18,7 @@ public class Main extends PApplet {
 
 
     public Box b = new Box(250,250,100,100);
+    public Box b2 = new Box(225,0,100,100);
 
     public float dt,lastTime;
 
@@ -29,9 +30,9 @@ public class Main extends PApplet {
 
     public void setup(){
         app=this;
-        for (int i = 0; i < Math.random()*10; i++){
-            Box box = new Box((float) (Math.random()*400)+100,(float) (Math.random()*400)+100,(float) (Math.random()*100),100);
-        }
+//        for (int i = 0; i < Math.random()*10; i++){
+//            Box box = new Box((float) (Math.random()*400)+100,(float) (Math.random()*400)+100,(float) (Math.random()*100),100);
+//        }
     }
 
     public void draw(){
@@ -46,9 +47,9 @@ public class Main extends PApplet {
        for (Stick s : sticks){
            s.update();
        }
-        for (Box b : boxes){
+       for (Box b : boxes){
             b.update();
-        }
+       }
 
 
 

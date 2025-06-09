@@ -1,5 +1,7 @@
 package main;
 
+import static main.Main.boxes;
+
 public class Point {
     private Vector2 pos = new Vector2(), oldPos = new Vector2();
     private Vector2 force = new Vector2();
@@ -91,6 +93,19 @@ public class Point {
             oldPos.x = pos.x+vel.x*elasticity;
         }
     }
+//    public void boxCollision(){
+//        for (Box b : Main.boxes){
+//            Vector2 boxPos = b.getPos();
+//            Vector2 boxDim = b.getDim();
+//            if (pos.x >= boxPos.x &&         // right of the left edge AND
+//                    pos.x <= boxDim.x + boxDim.x &&    // left of the right edge AND
+//                    pos.y >= boxDim.y &&         // below the top AND
+//                    pos.y <= boxDim.y + boxDim.y){  // above the bottom
+//                System.out.println("colliding");
+//            }
+//
+//        }
+//    }
 
     public Vector2 getPos(){
         return pos;
